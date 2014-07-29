@@ -1,0 +1,80 @@
+
+ CuPED TODO
+
+ - General:
+
+    * Remove references to 'eval' and 'exec' throughout.  (Some refactoring,
+      restructuring of the template file structure likely required for this;
+      see item on nested variables)
+
+    * Allow for nested variables.  (This should address many of the problems
+      currently faced with tracking variable dependencies, as well as reducing
+      the need to rely on calls to 'eval' / 'exec')
+
+    * Fix handling of 'maxSelection' / 'minSelection' in templates.  It should
+      be possible to have no upper or lower limit to the number of items
+      selected; consider adding this possibility with a special interpretation
+      of negative values for these options
+
+    * Improve in-code documentation throughout (docstrings, etc.)
+
+    * Add unit tests to all core classes
+
+    * Consider methods for internationalization / localization
+
+    * Allow multiple media files to be loaded with a single transcript (as
+      requested by Naomi Fox; in general, media file handling could stand
+      to be improved)
+
+    * Fix bug reported by Daniel Kaufman <dak37@cornell.edu>, where certain
+      ELAN transcripts are not loaded properly.
+
+ - src/cuped:
+
+    * Fill 'transcript.overlapping_annotations' (currently empty; should
+      be filled by all subclasses of 'Transcript')
+
+    * Improve the 'ffmpeg_avtools.py' implementation: add progress callbacks,
+      use 'yamdi' for FLV postprocessing, allow users to specify one or two-
+      pass video processing, more detailed access to media format-specific
+      processing options
+
+        @ More generally, rethink the 'avtools' interface and the options it
+          exposes to the user and the functions it needs to provide to be of
+          use to its callers
+
+    * Optionally read in ELAN '.pfsx' files for default tier display values
+
+ - src/cli:
+
+    * OSX: fix build to allow for command-line usage from within CuPED.app
+      (currently not working; apparent class-path issues)
+
+    * Fix prompting for multiple values (currently disabled)
+
+    * If the media associated with an ELAN transcript can't be loaded,
+      let the user know (and ideally prompt him/her to provide the location
+      of the relevant files)
+
+ - src/qt:
+
+    * Prompt the user to save their template when 'Done' is clicked (if the
+      template hasn't already been saved)
+
+    * Allow the user to specify a name for the template file being saved.
+      (This would help us avoid the situation of having $n$ completed
+       templates in the template list, all named "Basic Template")
+
+    * Improve the layout of 'CuPEDWizardCustomizeTier'.  This widget resizes
+      poorly, with the centre list occupying less space than it ideally
+      should
+
+    * If the media associated with an ELAN transcript can't be loaded,
+      let the user know (and ideally prompt him/her to provide the location
+      of the relevant files)
+
+    * Move acknowledgements into a separate (HTML) file
+
+    * Upgrade to (Py)Qt 4.5, then remove all restrictions upon wizard window
+      height (assuming that the cause of window size problems under win32 is
+      due to the bug reported fixed in Qt 4.5)

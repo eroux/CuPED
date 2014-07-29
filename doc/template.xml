@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template version="1.0">
+    <!-- The name of this template -->
+    <name></name>
+
+    <!-- A prose description of this template. -->
+    <description></description>
+
+    <!-- The license under which this template is being released. -->
+    <license></license>
+
+    <!-- The version number of this release of the template. -->
+    <version></version>
+
+    <!-- The path of the directory in which output files should be placed. -->
+    <!-- This value is only a default, and can be overridden by the user. -->
+    <!-- (If not specified, this defaults to the current working directory) -->
+    <output_directory></output_directory>
+
+    <!-- The output file which can be displayed as a preview of the final -->
+    <!-- product.  'type' specifies the MIME type of the preview file. -->
+    <!-- (If not specified, this defaults to the first file given in the -->
+    <!-- 'templates' section, which is treated as HTML) -->
+    <preview type=""></preview>
+
+    <!-- Contributor(s) to this template. (Can be repeated) -->
+    <contributor name="" role="" />
+
+    <!-- The variables used by this template. -->
+    <variables>
+        <!-- A definition of a variable exposed to the template.  (Can be -->
+        <!-- repeated) -->
+        <variable>
+            <!-- Display attributes. -->
+
+            <!-- (Optional) The name with which this variable will be -->
+            <!-- displayed to the user.  For anything other than tier -->
+            <!-- display attributes, it is strongly recommended that a -->
+            <!-- user-readable name be provided. -->
+            <name></name>
+
+            <!-- (Optional) A prose description of this variable's purpose. -->
+            <!-- This will typically be displayed to users when they are -->
+            <!-- asked to provide a value for this variable. -->
+            <description></description>
+
+
+            <!-- Attributes concerning the user's selection and where it is -->
+            <!-- stored. -->
+
+            <!-- The type of this variable. -->
+            <!-- Possible values are:
+                * 'directory': some number of directories.
+
+                * 'file': some number of files.
+                    - Option: 'fileType': Restrict the range of file types
+                      which the user can select.  Possible values are:
+                        * 'image': any CuPED-supported image format;
+                        * 'audio': any CuPED-supported audio format;
+                        * 'video': any CuPED-supported video format;
+                        * 'av': any CuPED-supported audio or video format;
+                        * 'transcript': any CuPED-supported transcript format.
+
+               * 'transcript': some number of CuPED-supported transcripts.
+                  (This differs from a 'file' with a 'fileType' of
+                  'transcript', in that this will attempt to parse the
+                  provided transcript, not just confirm its type)
+
+               * 'string': Some number of strings of characters.
+                    - Option: 'minLength': Require all strings provided by
+                      the user to have a specific minimum length (in
+                      characters).  Possible values are any positive integer
+                      less than or equal to 'maxLength'.
+                    - Option: 'maxLength': Require all strings provided by
+                      the user to have a specific maximum length (in
+                      characters).  Possible values are any positive integer
+                      greater than or equal to 'minLength'.
+
+               * 'colour', 'color': some number of colours.  Each colour is
+                  represented as a six-character string of hexadecimal digits
+                  of the form 'rrggbb', where 'rr', 'gg', and 'bb' stand for
+                  the red, green, and blue (RGB) values which comprise the
+                  colour.
+
+               * 'font': Some number of fonts.
+
+               * 'tier': Some number of tiers from among those named in the
+                  list specified by 'range'.  ('range' is expected to evaluate
+                  to a list of Transcript objects)
+
+               * 'selection': Select some number of options among those
+                  specifeid in 'range'.  ('range' is expected to evaluate to
+                  a list of triples, each having the form (display_name,
+                  display_description, value))
+            -->
+            <type></type>
+
+            <!-- The destination variable.  This is the name under which -->
+            <!-- the value of this variable will be exposed to the template -->
+            <!-- and to all subsequent Python code.  This string must -->
+            <!-- conform to Python variable naming conventions (e.g. no -->
+            <!-- spaces, must begin with an underscore or a letter from a -->
+            <!-- to z, etc.) -->
+            <destination></destination>
+
+            <!-- (Optional) Options which qualify the behaviour of the -->
+            <!-- given selection type.  Options recognized for all variable -->
+            <!-- types are:
+                * 'minSelection': the minimum number of items which must be
+                   provided or selected by the user for this variable.  If
+                   not specified, this defaults to 1 (at least one item has
+                   to be selected).  Possible values are any non-negative
+                   integer, less than or equal to 'maxSelection'.
+
+                * 'maxSelection': the maximum number of items which must be
+                   provided or selected by the user for this variable.  If
+                   not specified, this defaults to 1 (at most one item).
+                   Possible values are any non-negative integer, greater than
+                   or equal to 'minSelection'.
+
+                * 'isConstant': is this variable a constant which the user
+                   should neither be prompted to supply values for, nor
+                   permitted to modify?  If not specified, this defaults to
+                   False (this variable is not a constant).  Possible values
+                   are 'True' and 'False'.
+
+                * 'isOrdered': is the order of selected items meaningful in
+                   this variable?  If not specified, this defaults to False
+                   (the order is not significant).  Possible values are
+                   'True' and 'False'.
+
+                * 'isRequired': is the user required to provide a non-None
+                   value for this variable?  If not specified, this defaults
+                   to True (a value must be provided).  Possible values are
+                   'True' and 'False'.
+            -->
+            <!-- Type-specific options are listed in the comments conerning -->
+            <!-- 'type' above.  (Can be repeated) -->
+            <option name=""></option>
+
+
+            <!-- Value attributes. -->
+
+            <!-- (Optional) The default choice for this variable's value. -->
+            <default></default>
+
+            <!-- (Optional) A string representing the choice made by the -->
+            <!-- user (or by this template metadata, if this is a constant) -->
+            <!-- for this variable's value. -->
+            <choice></choice>
+
+            <!-- (Optional) The range of possible values for this variable. -->
+            <!-- This is treated as a Python expression, i.e., either a -->
+            <!-- variable name or some set of stipulated values. -->
+            <range></range>
+
+            <!-- (Optional) Condition under which the value provided by the -->
+            <!-- user for this variable should be accepted.  This is a block -->
+            <!-- of Python code evaluated on the given value which can raise -->
+            <!-- a named error if anything is wrong.  No return value is -->
+            <!-- expected. -->
+            <condition></condition>
+
+            <!-- (Optional) The name of another variable upon the value of -->
+            <!-- which this variable depends.  If not specified, no such -->
+            <!-- dependency is assumed. -->
+            <dependency></dependency>
+        </variable>
+    </variables>
+
+    <!-- A set of files which should be included in the output. -->
+    <templates>
+        <!-- A file that should be processed and the output placed in the -->
+        <!-- output directory. (Can be repeated) -->
+        <template>
+            <!-- The name of the input file.  This can either be an -->
+            <!-- absolute path or a relative path within the same directory -->
+            <!-- as this template metadata file.  (Required) -->
+            <input></input>
+
+            <!-- The name and location of the output file.  This can either -->
+            <!-- be an absolute path or a relative path within the output -->
+            <!-- directory.  When not specified, this defaults to the name -->
+            <!-- of the input file, albeit in the output directory. -->
+            <output></output>
+        </template>
+
+        <!-- A file that should be included in the output directory without -->
+        <!-- any processing. (Can be repeated) -->
+        <include>
+            <!-- The name of the input file.  This can either be an -->
+            <!-- absolute path or a relative path within the same directory -->
+            <!-- as this template metadata file.  (Required) -->
+            <input></input>
+
+            <!-- The name and location of the output file.  This can either -->
+            <!-- be an absolute path or a relative path within the output -->
+            <!-- directory.  When not specified, this defaults to the name -->
+            <!-- of the input file, albeit in the output directory. -->
+            <output></output>
+        </include>
+    </templates>
+</template>

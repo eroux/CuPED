@@ -1,0 +1,39 @@
+<ui version="4.0" >
+ <class>CuPEDWizardWelcome</class>
+ <widget class="QWidget" name="CuPEDWizardWelcome" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>451</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Welcome to CuPED</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <widget class="QLabel" name="label" >
+     <property name="text" >
+      <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Lucida Grande'; font-size:13pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Welcome to &lt;span style=" font-weight:600; color:#ff2b3d;">CuPED&lt;/span> (&lt;span style=" font-weight:600; color:#ff2b3d;">Cu&lt;/span>stomizable &lt;span style=" font-weight:600; color:#ff2b3d;">P&lt;/span>resentation of &lt;span style=" font-weight:600; color:#ff2b3d;">E&lt;/span>LAN &lt;span style=" font-weight:600; color:#ff2b3d;">D&lt;/span>ocuments)!&lt;/p>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The screens which follow will guide you through the steps of selecting and customizing a CuPED template which can be used to turn your ELAN transcripts into other formats.&lt;/p>&lt;/body>&lt;/html></string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

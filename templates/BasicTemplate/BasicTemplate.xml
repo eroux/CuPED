@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template version="1.0">
+    <name>CuPED - Basic Template</name>
+    <description>A template to test out basic CuPED functions.</description>
+    <license>GNU GPL2 or later</license>
+    <version>1.0</version>
+
+    <input_directory>%CuPED%/templates/BasicTemplate</input_directory>
+    <output_directory>out</output_directory>
+    <preview type="text/plain">basic_template.txt</preview>
+    <contributor name="Christopher Cox" role="Author" />
+
+    <variables>
+        <variable>
+            <name>A transcript</name>
+            <description>A transcript file to be loaded.</description>
+
+            <type>transcript</type>
+            <default>../CuPED/_Sources/Aupelkoose/Aupelkoose.eaf</default>
+            <destination>transcript</destination>
+        </variable>
+
+        <variable>
+            <name>A tier</name>
+            <description>Some tier singled out during processing.</description>
+
+            <type>tier</type>
+            <destination>tier</destination>
+            <default>Orthographic Plautdietsch Transcription</default>
+            <range>transcript[0].tiers</range>
+            <dependency>A transcript</dependency>
+        </variable>
+
+        <variable>
+            <name>A directory</name>
+            <description>A directory to be used in processing.</description>
+
+            <type>directory</type>
+            <destination>directory</destination>
+        </variable>
+
+        <variable>
+            <name>A file</name>
+            <description>A file to be used in processing.</description>
+
+            <type>file</type>
+            <destination>file</destination>
+        </variable>
+
+        <variable>
+            <name>A string value</name>
+            <description>A string value to test the template.</description>
+
+            <type>string</type>
+            <destination>string</destination>
+        </variable>
+
+        <variable>
+            <name>A colour</name>
+            <description>Some colour to be used in processing.</description>
+
+            <type>colour</type>
+            <destination>colour</destination>
+        </variable>
+
+        <variable>
+            <name>A font</name>
+            <description>Some font to be used in processing.</description>
+
+            <type>font</type>
+            <destination>font</destination>
+        </variable>
+
+        <variable>
+            <name>A selection</name>
+            <description>Some selection used in processing.</description>
+
+            <type>selection</type>
+            <destination>selection</destination>
+            <range>[(t.name, "%s: %d child annotations" % (t.name, len(t.annotations)), t) for t in transcript[0].tiers]</range>
+            <dependency>A transcript</dependency>
+        </variable>
+    </variables>
+
+    <templates>
+        <template>
+            <input>BasicTemplate.mako</input>
+            <output>basic_template.txt</output>
+        </template>
+
+        <include>
+            <input>BasicTemplate.xml</input>
+            <output>not_important.xml</output>
+        </include>
+    </templates>
+</template>

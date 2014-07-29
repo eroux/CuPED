@@ -1,0 +1,236 @@
+<ui version="4.0" >
+ <class>CuPEDWizardFinishedTemplate</class>
+ <widget class="QWidget" name="CuPEDWizardFinishedTemplate" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>561</width>
+    <height>373</height>
+   </rect>
+  </property>
+  <property name="font" >
+   <font>
+    <pointsize>18</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle" >
+   <string>CuPED - Finished Template</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <item>
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string/>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2" >
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3" >
+        <item>
+         <widget class="QToolButton" name="saveTemplateButton" >
+          <property name="toolTip" >
+           <string>Saves a copy of the finished template for later use, storing all choices made to process the template.</string>
+          </property>
+          <property name="statusTip" >
+           <string>Save a copy of the finished template for later use, storing all choices made to process the template.</string>
+          </property>
+          <property name="text" >
+           <string>...</string>
+          </property>
+          <property name="icon" >
+           <iconset>
+            <normaloff>bin/icons/tango/document-save.png</normaloff>bin/icons/tango/document-save.png</iconset>
+          </property>
+          <property name="iconSize" >
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="saveTemplateLabel" >
+          <property name="font" >
+           <font>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+          <property name="text" >
+           <string>Save a copy of the finished template for later use.</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout" >
+        <item>
+         <widget class="QToolButton" name="openTemplateButton" >
+          <property name="statusTip" >
+           <string comment="Open the main file of the finished template's output, using the default application associated with files of this type." >Opens the main file of the finished template's output, using the default application associated with files of this type.</string>
+          </property>
+          <property name="text" >
+           <string>...</string>
+          </property>
+          <property name="icon" >
+           <iconset>
+            <normaloff>bin/icons/tango/document-open.png</normaloff>bin/icons/tango/document-open.png</iconset>
+          </property>
+          <property name="iconSize" >
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="openTemplateLabel" >
+          <property name="font" >
+           <font>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+          <property name="text" >
+           <string>View the template output using the default application.</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2" >
+        <item>
+         <widget class="QToolButton" name="openDirectoryButton" >
+          <property name="toolTip" >
+           <string>Opens the directory in which the processed template files are stored.</string>
+          </property>
+          <property name="statusTip" >
+           <string>Open the directory in which the processed template files are stored.</string>
+          </property>
+          <property name="text" >
+           <string>...</string>
+          </property>
+          <property name="icon" >
+           <iconset>
+            <normaloff>bin/icons/tango/folder-open.png</normaloff>bin/icons/tango/folder-open.png</iconset>
+          </property>
+          <property name="iconSize" >
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="openDirectoryLabel" >
+          <property name="font" >
+           <font>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+          <property name="text" >
+           <string>Open the output directory.</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5" >
+        <item>
+         <widget class="QToolButton" name="anotherTemplateButton" >
+          <property name="toolTip" >
+           <string>Starts customizing a new template, beginning this process from the start.</string>
+          </property>
+          <property name="statusTip" >
+           <string>Start customizing a new template, beginning this process from the start.</string>
+          </property>
+          <property name="text" >
+           <string>...</string>
+          </property>
+          <property name="icon" >
+           <iconset>
+            <normaloff>bin/icons/tango/document-new.png</normaloff>bin/icons/tango/document-new.png</iconset>
+          </property>
+          <property name="iconSize" >
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="anotherTemplateLabel" >
+          <property name="font" >
+           <font>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+          <property name="text" >
+           <string>Customize another template.</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4" >
+     <item>
+      <widget class="QLabel" name="aboutCuPEDLabel" >
+       <property name="font" >
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text" >
+        <string>About CuPED...</string>
+       </property>
+       <property name="alignment" >
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="aboutCuPEDButton" >
+       <property name="toolTip" >
+        <string>Displays information about the current version of CuPED.</string>
+       </property>
+       <property name="statusTip" >
+        <string>Display information about the current version of CuPED.</string>
+       </property>
+       <property name="text" >
+        <string>...</string>
+       </property>
+       <property name="icon" >
+        <iconset>
+         <normaloff>bin/icons/cuped/Cupedplain-64x64.png</normaloff>bin/icons/cuped/Cupedplain-64x64.png</iconset>
+       </property>
+       <property name="iconSize" >
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

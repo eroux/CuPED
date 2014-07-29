@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template version="1.0">
+    <name>CuPED - Flowplayer Template</name>
+    <description>
+        A template which produces HTML/JS/Flash output, using Flowplayer to
+        interact with media.
+
+        Note: Adobe Flash Player 8 (or later) may be required to view the web
+        pages produced by this template in synchrony with the embedded media.
+        (It may be possible to view such pages with Flash Player 7, as well,
+        although not all features may be supported; this has not been tested)
+    </description>
+
+    <contributor name="Christopher Cox" role="Author" />
+    <license>GNU GPL2 or later</license>
+    <version>1.0</version>
+
+    <input_directory>%CuPED%/templates/FlowplayerTemplate</input_directory>
+    <output_directory>out</output_directory>
+    <preview type="text/html">index.html</preview>
+
+    <variables>
+        <variable>
+            <name>Transcript file</name>
+            <description>
+                The transcript file to be turned into a web page.
+            </description>
+
+            <type>transcript</type>
+            <destination>transcript</destination>
+        </variable>
+
+        <variable>
+            <name>Primary tier</name>
+            <description>
+                The tier containing the annotations which should be given the
+                most prominence in the resulting HTML.  Only children of this
+                tier will be displayed in the output.
+            </description>
+
+            <type>tier</type>
+            <destination>primary_tier</destination>
+            <range>transcript[0].tiers</range>
+            <dependency>Transcript file</dependency>
+        </variable>
+
+        <variable>
+            <name>Convert media?</name>
+            <description>
+                Convert the media associated with the transcript into
+                appropriate output formats.  Media have to be converted at
+                least once in order to be displayed; however, if no changes
+                have been made to the transcript or its associated media since
+                the last time it was processed using this template, then this
+                conversion can likely be skipped.
+            </description>
+
+            <type>selection</type>
+            <destination>should_convert_media</destination>
+            <default>Yes</default>
+            <range>[('Yes', 'Yes, convert the media', True), ('No', 'No, skip converting the media', False)]</range>
+        </variable>
+
+        <variable>
+            <name>Title of page</name>
+            <description>
+                The title of the web page being generated.
+            </description>
+
+            <type>string</type>
+            <destination>title</destination>
+            <default>CuPED - Flowplayer template</default>
+            <option name="isRequired">False</option>
+        </variable>
+    </variables>
+
+    <templates>
+        <template>
+            <input>FlowplayerTemplate.mako</input>
+            <output>index.html</output>
+        </template>
+
+        <include><input>js/jquery.pack.js</input></include>
+        <include><input>js/flashembed.min.js</input></include>
+        <include><input>js/flow.embed.js</input></include>
+
+        <include><input>img/speaker.png</input></include>
+        <include><input>swf/FlowplayerDark.swf</input></include>
+    </templates>
+</template>

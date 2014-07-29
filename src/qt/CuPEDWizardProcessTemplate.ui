@@ -1,0 +1,74 @@
+<ui version="4.0" >
+ <class>CuPEDWizardProcessTemplate</class>
+ <widget class="QWidget" name="CuPEDWizardProcessTemplate" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>577</width>
+    <height>311</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Processing Template</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3" >
+   <item>
+    <widget class="QGroupBox" name="progressGroupBox" >
+     <property name="title" >
+      <string>Progress</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout" >
+      <item>
+       <widget class="QLabel" name="processingLabel" >
+        <property name="text" >
+         <string>Processing template...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QProgressBar" name="processingProgressBar" >
+        <property name="toolTip" >
+         <string>Indicates progress of template processing.</string>
+        </property>
+        <property name="statusTip" >
+         <string>Indicates progress of template processing.</string>
+        </property>
+        <property name="value" >
+         <number>0</number>
+        </property>
+        <property name="invertedAppearance" >
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="detailsGroupBox" >
+     <property name="title" >
+      <string>Details</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2" >
+      <item>
+       <widget class="QPlainTextEdit" name="detailsTextEdit" >
+        <property name="toolTip" >
+         <string>Additional information about the progress of template processing.</string>
+        </property>
+        <property name="statusTip" >
+         <string>Additional information about the progress of template processing.</string>
+        </property>
+        <property name="readOnly" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

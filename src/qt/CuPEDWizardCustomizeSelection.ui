@@ -1,0 +1,55 @@
+<ui version="4.0" >
+ <class>CuPEDWizardCustomizeSelection</class>
+ <widget class="QWidget" name="CuPEDWizardCustomizeSelection" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>306</width>
+    <height>123</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Customize Selection</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" >
+   <property name="margin" >
+    <number>10</number>
+   </property>
+   <item rowspan="3" row="0" column="0" >
+    <widget class="QListWidget" name="settingsList" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" >
+    <widget class="QToolButton" name="upButton" >
+     <property name="text" >
+      <string>...</string>
+     </property>
+     <property name="icon" >
+      <iconset>
+       <normaloff>bin/icons/circular/arrow_up.png</normaloff>bin/icons/circular/arrow_up.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" >
+    <widget class="QToolButton" name="downButton" >
+     <property name="text" >
+      <string>...</string>
+     </property>
+     <property name="icon" >
+      <iconset>
+       <normaloff>bin/icons/circular/arrow_down.png</normaloff>bin/icons/circular/arrow_down.png</iconset>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
