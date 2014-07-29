@@ -3,16 +3,12 @@ CuPED
 
 Customizable Presentation of ELAN Documents (non official!)
 
- CuPED - Customizable Presentation of ELAN Documents
- Christopher Cox, <christopher.cox@ualberta.ca>
- Andrea Berez, <aberez@umail.ucsb.edu>
-
 CuPED ("Customizable Presentation of ELAN Documents") transforms time-aligned
 XML transcripts produced with ELAN (EUDICO Linguistic Annotator; MPI Nijmegen) 
 and their associated media into other file formats.
 
 CuPED is written in Python, and distributed under the GNU General Public
-License, Version 2 (see 'COPYING').  Certain software components used by
+License, Version 2 (see 'LICENSE').  Certain software components used by
 CuPED may be released under other licenses; see CREDITS for more information.
 
 ## About this repository ##
