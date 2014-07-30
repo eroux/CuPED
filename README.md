@@ -38,13 +38,15 @@ To run CuPED under Linux, please install the following:
 
  * python 2.x
  * python-qt4
+ * pyqt4-dev-tools
  * python-mako
- * python-setuptools
  * ffmpeg
  * yamdi
  
 All are available under Debian.
 
+Then run `./src/qt/compile.sh` to compile the .ui files into python.
+
 ### Running ###
 
-Not sure about this yet...
+Once installed, run `./src/cuped-cli` or `./src/cuped-qt`.
