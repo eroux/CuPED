@@ -45,7 +45,7 @@ To run CuPED under Linux, please install the following:
  
 All are available under Debian.
 
-Then run `./src/qt/compile.sh` to compile the .ui files into python.
+Then run `./compile.sh` to compile the .ui files into python.
 
 ### Running ###
 
