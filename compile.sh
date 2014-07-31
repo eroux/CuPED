@@ -1,2 +1,1 @@
-cd src/qt
-for f in `ls *.ui`; do pyuic4 "$f" > "`basename $f .ui`.py"; done
+for f in `ls qt/*.ui`; do pyuic4 "$f" > "qt/`basename $f .ui`.py"; done
