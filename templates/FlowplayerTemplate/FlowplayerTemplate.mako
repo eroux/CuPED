@@ -45,6 +45,10 @@ input_video_file_duration = -1
 media_width = -1
 media_height = -1
 
+# By default, we don't use a splash image (i.e. for audio).
+splash_image = None;
+
+# FIXME: this should handle multiple video/audio streams more gracefully.
 for (input_media_file, input_mime_type, playback_offset) in transcript.media:
     if input_audio_file is None and (input_mime_type.startswith('audio/') or
                                      might_be_audio(input_media_file)):
@@ -58,6 +62,10 @@ for (input_media_file, input_mime_type, playback_offset) in transcript.media:
         input_video_file_playback_offset = playback_offset
         input_video_file_duration = av.get_duration(input_video_file)
         (media_width, media_height) = av.get_dimensions(input_video_file)
+
+        # Create a snapshot from the video to use as the player splash image.
+        splash_image = 'data/splash.jpg'
+        av.extract_image(input_video_file, 125, splash_image, 'jpeg')
 
 # Calculate total durations.
 input_media_file_duration = max(input_audio_file_duration, \
@@ -84,8 +92,7 @@ output_media_file_duration = \
 is_audio_file = (input_audio_file is not None)
 if media_width == -1 or media_height == -1:
     is_audio_file = True
-    media_width = 300
-    media_height = 50
+    media_height = 25
 
 output_media_file = 'data/output.flv'
 if should_convert_media and not PREVIEW:
@@ -103,15 +110,10 @@ if should_convert_media and not PREVIEW:
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>${title}</title>
-<script type="text/javascript" src="js/jquery.pack.js"></script>
-<script type="text/javascript" src="js/flashembed.min.js"></script>
-<script type="text/javascript" src="js/flow.embed.js"></script>
+<script type="text/javascript" src="js/flowplayer-3.2.8.min.js"></script>
 
 <script type="text/javascript">
     //<![CDATA[
-    // A reference to the Flowplayer instance.
-    var fp;
-
     // Check which annotation we're in every 50 milliseconds.
     var updateInterval = 50;
 
@@ -129,31 +131,93 @@ if should_convert_media and not PREVIEW:
     // ID of the timer which tracks the end of annotations.
     var endAnnotationTimer = null;
 
+    // Are we playing an annotation for the user right now?
+    var inPlayAnnotation = false;
+
 %if not PREVIEW:
     window.onload = function() {
-        // Get the Flowplayer API interface.
-        fp = flashembed("CuPED-global-player-object", {
-            src: "swf/FlowplayerDark.swf",
-            allowscriptaccess: 'always',
-            width: ${media_width},
-            height: ${media_height} 
-            }, {config: {
-            autoPlay: false,
-            videoFile: "../${output_media_file}",
-            initialScale: 'scale',
-            loop: false,
+        flowplayer("CuPED-global-player-object", "swf/flowplayer-3.2.8.swf",
 
-            showStopButton: false,
-            showScrubber: true,
-            showVolumeSlider: false,
-            showMuteVolumeButton: false,
-            showFullScreenButton: false,
-            showMenu: false,
-            controlsOverVideo: 'locked',
-            controlBarBackgroundColor: -1,
-            controlBarGloss: 'none'
+            // Flash settings for Flowplayer and its plugins.
+            {
+                clip: {
+                    // Load the clip itself.
+                    url: "../data/output.flv",
+                    autoPlay: false,
+                    initialScale: 'scale',
+                    loop: false,
+
+                    onSeek: function() {
+                        if (! inPlayAnnotation) {
+                            clearTimeout(endAnnotationTimer);
+                        }
+                    },
+
+                    onPause: function() {
+                        clearTimeout(endAnnotationTimer);
+                    },
+
+
+                    onStart: function() {
+                        // Hide the overlay "play" button on start-up.
+                        this.getPlugin("play").hide();
+                    },
+
+                    onStop: function() {
+                        // Show the overlay "play" button again once stopped.
+                        clearTimeout(endAnnotationTimer);
+                        this.getPlugin("play").show();
+                    }
+                },
+
+                plugins: {
+                    controls: {
+                        // Load the controls.
+                        url: 'swf/flowplayer.controls-3.2.8.swf',
+
+                        // Show the scrubber, but not the timer.
+                        scrubber: true,
+                        time: false,
+
+                        // Hide the stop button, the mute button, the full-
+                        // screen button, the playlist button, and the volume
+                        // controls.
+                        stop: false,
+                        volume: false,
+                        fullscreen: false,
+                        playlist: false,
+                        mute: false,
+
+                        backgroundColor: '#000',
+## If we're dealing with audio only.
+%if splash_image is None:
+                        autoHide: false,
+%endif
+                    }
+                },
+
+                // Once the player has been initialized (and the splash image
+                // clicked), begin watching for changes in the current
+                // annotation and start the media playing.
+                //
+                // The idea behind this is that the JavaScript polls the
+                // player every 'updateInterval' milliseconds to see if we've
+                // entered into a new annotation.  If we have, then the
+                // display is updated.
+                onLoad: function() {
+                    currentAnnotation = null;
+                    setInterval(checkAnnotation, updateInterval);
+## If we have a splash image, then clicking on it should start playback.
+%if splash_image is not None:
+                    $f("CuPED-global-player-object").play();
+%endif
+                },
+
+                onError: function(errorCode, errorMessage) {
+                    alert("Flowplayer: " + errorCode + ": " + errorMessage);
+                }
             }
-        });
+        );
     }
 %endif
 
@@ -245,7 +309,7 @@ if should_convert_media and not PREVIEW:
             anElement.className += ' CuPED-current-annotation';
 
             // Scroll to the new element.
-            scrollToAnnotation(annotation, 'top');
+            scrollToAnnotation(annotation, 'middle');
         }
 
         // Finally, keep a reference to the current annotation.
@@ -255,45 +319,17 @@ if should_convert_media and not PREVIEW:
     // Callback: check the Flowplayer instance to find out what annotation
     // we're in and update the display as necessary.
     function checkAnnotation() {
-        closestAnnotation = findAnnotation(fp.getTime());
+        closestAnnotation = 
+            findAnnotation($f("CuPED-global-player-object").getTime());
         if (closestAnnotation != currentAnnotation) {
             setCurrentAnnotation(closestAnnotation);
         }
     }
 
-    // Once the player has been initialized, begin watching for changes in
-    // the current annotation.
-    //
-    // The idea behind this is that the JavaScript polls the player every
-    // 'updateInterval' milliseconds to see if we've entered into a new
-    // annotation.  If we have, then the display is updated.
-    function onFlowPlayerReady() {
-        currentAnnotation = null;
-        setInterval(checkAnnotation, updateInterval);
-    }
-
-
-    // Alright, if we can't rely on cue points to work both for audio and for
-    // video, then we'll have to tie our own rope.
-
-    function onStop(clip) {
-        clearTimeout(endAnnotationTimer);
-    }
-
-    function onSeek(clip) {
-        clearTimeout(endAnnotationTimer);
-    }
-
-    function onPause(clip) {
-## TODO: This isn't quite right: we should really preserve the current timer
-##          end-point, and then restore it on playing.  Maybe do this later;
-##          not a big deal right now, though.
-        clearTimeout(endAnnotationTimer);
-    }
-
     // Callback: when an annotation is done, pause the player.
     function onEndAnnotation() {
-        fp.Pause();
+        inPlayAnnotation = false;
+        $f("CuPED-global-player-object").pause();
         clearTimeout(endAnnotationTimer);
     }
 
@@ -301,12 +337,12 @@ if should_convert_media and not PREVIEW:
     // (in seconds).
     function playAnnotation(start_time, end_time) {
         // Start the media playing, then seek to the start of the annotation.
-        fp.DoPlay()
-        fp.Seek(start_time);
+        inPlayAnnotation = true;
+        $f("CuPED-global-player-object").play();
+        $f("CuPED-global-player-object").seek(start_time);
 
         // Set a time-out to play just until the end of this annotation.
-        endAnnotationTimer = 
-            setTimeout(onEndAnnotation, (end_time - start_time) * 1000);
+        endAnnotationTimer = setTimeout(onEndAnnotation, (end_time - start_time) * 1000);
     }
     //]]>
 </script>
@@ -402,7 +438,7 @@ while len(tier_queue) > 0:
         ## Use the display attributes of the first font by default.
 <% font = tier.fonts[0] %>\
         %if font.font_size > -1:
-        font-size: ${int(font.font_size)}pt;    ## FIXME: CSS allows floats?
+        font-size: ${int(font.font_size)}pt;
         %endif
         %if font.is_bold:
         font-weight: bold;
@@ -446,7 +482,15 @@ html, body { height: 100%; overflow-y: hidden; }
 <body>
 
 <div class="CuPED-global-player">
-    <div id="CuPED-global-player-object"></div>
+%if media_width < 0:
+    <div id="CuPED-global-player-object" style="width:100%;height:${media_height}px;">
+%else:
+    <div id="CuPED-global-player-object" style="width:${media_width}px;height:${media_height}px;">
+%endif
+%if not PREVIEW and splash_image is not None:
+        <img src="${splash_image}" />
+%endif
+    </div>
 </div>
 
 <div class="CuPED-annotations">

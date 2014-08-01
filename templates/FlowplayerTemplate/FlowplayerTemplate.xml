@@ -80,11 +80,9 @@
             <output>index.html</output>
         </template>
 
-        <include><input>js/jquery.pack.js</input></include>
-        <include><input>js/flashembed.min.js</input></include>
-        <include><input>js/flow.embed.js</input></include>
-
+        <include><input>js/flowplayer-3.2.8.min.js</input></include>
         <include><input>img/speaker.png</input></include>
-        <include><input>swf/FlowplayerDark.swf</input></include>
+        <include><input>swf/flowplayer-3.2.8.swf</input></include>
+        <include><input>swf/flowplayer.controls-3.2.8.swf</input></include>
     </templates>
 </template>

@@ -20,7 +20,7 @@ import os
 import ConfigParser
 
 class Settings(object):
-    _version = '0.3.15'
+    _version = '0.3.16'
 
     def __new__(cls, config_file = None, *args, **kwargs):
         # Singleton class.

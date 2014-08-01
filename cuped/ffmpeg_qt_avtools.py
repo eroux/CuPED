@@ -41,7 +41,8 @@ class ffmpegQtAVTools(avtools.AVTools):
                  '-i_qfactor', '0.71', '-qmin', '10', '-qmax', '51', \
                  '-qdiff', '4'],
         'flv' : ['-vcodec', 'flv', '-qcomp', '0.6', '-qmax', '15', \
-                 '-qdiff', '4', '-i_qfactor', '0.71', '-b_qfactor', '0.76'],
+                 '-qdiff', '4', '-i_qfactor', '0.71', '-b_qfactor', '0.76', \
+                 '-b', '512k'],
         'copy' : ['-vcodec', 'copy'],
         'none' : ['-vn']
     }
@@ -265,8 +266,8 @@ class ffmpegQtAVTools(avtools.AVTools):
     def extract_clip(self, input_video_file_name, input_video_start_time_ms, \
             input_video_end_time_ms, input_audio_file_name, \
             input_audio_start_time_ms, input_audio_end_time_ms, \
-            output_file_name, output_video_format = 'copy', \
-            output_audio_format = 'copy', output_dimensions = (-1, -1)):
+            output_file_name, output_video_format = 'none', \
+            output_audio_format = 'none', output_dimensions = (-1, -1)):
         """
         Extract the segment of the given input media file which starts and ends
         at the given millisecond positions, ensuring that the resulting clip is
@@ -330,9 +331,11 @@ class ffmpegQtAVTools(avtools.AVTools):
                 '-t', '%s' % self.to_timestamp(input_video_end_time_ms - \
                                                input_video_start_time_ms)])
 
-            command.extend(video_parameters)
             if output_video_format != 'none' and height > -1 and width > -1:
                 command.extend(['-s', '%dx%d' % (int(height), int(width))])
+
+        if video_parameters is not None:
+            command.extend(video_parameters)
 
         if input_audio_file_name is not None:
             command.extend([ \
@@ -341,6 +344,7 @@ class ffmpegQtAVTools(avtools.AVTools):
                 '-t', '%s' % self.to_timestamp(input_audio_end_time_ms - \
                                                input_audio_start_time_ms) ])
 
+        if audio_parameters is not None:
             command.extend(audio_parameters)
 
         # If there are separate audio and video sources, make sure they're
@@ -441,7 +445,7 @@ class ffmpegQtAVTools(avtools.AVTools):
         self.process.connect(self.process, \
             QtCore.SIGNAL('readyReadStandardOutput()'), readOutput)
         self.process.start(ffmpegQtAVTools.ffmpeg_executable, \
-           ['-i', input_file_name, '-y', '-r', '1', '-f', 'image2', \
+           ['-i', input_file_name, '-y', '-t', '1', '-f', 'image2', \
             '-ss', '%s' % self.to_timestamp(time_ms), \
             '-s', '%dx%d' % (int(height), int(width)), \
             "%s%s" % (output_file_name, extension)])
