@@ -219,7 +219,7 @@ class CuPEDWizardChooseTemplate(QtGui.QWizardPage):
         file_name = QtGui.QFileDialog.getOpenFileName(self, 'Open Template', \
             os.path.expanduser('~'), 'CuPED Templates (*.xml)')
         if file_name:
-            self.addTemplate(str(file_name), add_to_config = True)
+            self.addTemplate(unicode(file_name), add_to_config = True)
 
     def removeTemplateButtonClicked(self):
         # Find out what the current selection is.
@@ -538,7 +538,7 @@ class CuPEDWizardCustomizeString(CuPEDWizardCustomizeVariable):
                           % maxLength)
                     return None
 
-            return str(text)
+            return unicode(text)
 
         # Otherwise, return None.
         return None
@@ -570,14 +570,14 @@ class CuPEDWizardCustomizeString(CuPEDWizardCustomizeVariable):
                           % maxLength)
                     return None
 
-            return str(text)
+            return unicode(text)
 
         # Otherwise, return None.
         return None
 
     def str(self, item):
         # Strings are printable as-is!
-        return item
+        return unicode(item)
 
 class CuPEDWizardCustomizeDirectory(CuPEDWizardCustomizeVariable):
     def __init__(self, parent = None, variable = None, variables = []):
@@ -605,7 +605,7 @@ class CuPEDWizardCustomizeDirectory(CuPEDWizardCustomizeVariable):
         q_dirname = QtGui.QFileDialog.getExistingDirectory(self, \
             'CuPED - Open directory', item)
         if q_dirname:
-            return str(q_dirname)
+            return unicode(q_dirname)
 
         return None
 
@@ -653,7 +653,7 @@ class CuPEDWizardCustomizeFile(CuPEDWizardCustomizeVariable):
         q_filename = QtGui.QFileDialog.getOpenFileName(self, \
             'CuPED - Open file', oldFile, filter)
         if q_filename:
-            return str(q_filename)
+            return unicode(q_filename)
 
         return None
 
@@ -685,7 +685,7 @@ class CuPEDWizardCustomizeTranscript(CuPEDWizardCustomizeVariable):
         q_transcript = QtGui.QFileDialog.getOpenFileName(self, \
             'CuPED - Open transcript', item, 'All transcripts (*.eaf)')
         if q_transcript:
-            return str(q_transcript)
+            return unicode(q_transcript)
 
         return None
 
@@ -718,7 +718,7 @@ class CuPEDWizardCustomizeColour(CuPEDWizardCustomizeVariable):
         # For now, colours can be printed as hexadecimal values.
         # TODO: improve this later on! (maybe this method could return
         # listwidgets, instead?)
-        return str(item)
+        return unicode(item)
 
 class CuPEDWizardCustomizeFont(CuPEDWizardCustomizeVariable):
     def __init__(self, parent = None, variable = None, variables = []):
@@ -743,7 +743,7 @@ class CuPEDWizardCustomizeFont(CuPEDWizardCustomizeVariable):
         return None
 
     def str(self, item):
-        return str(item)
+        return unicode(item)
 
     def _qfont_to_cuped_font(self, qfont):
         font = cuped.display.CuPEDFont()
@@ -860,7 +860,7 @@ class CuPEDWizardCustomizeSelection(QtGui.QWizardPage):
         for index in range(0, self.ui.settingsList.count()):
             child = self.ui.settingsList.item(index)
             if child.checkState() == QtCore.Qt.Checked:
-                choices.append(str(child.text()))
+                choices.append(unicode(child.text()))
 
         self.variable.choice = choices
 
@@ -1253,7 +1253,7 @@ class CuPEDWizardCustomizeTier(CuPEDWizardCustomizeSelection):
         for row in range(0, self.ui.settingsList.count()):
             tier_widget = self.ui.settingsList.item(row)
             tier_font = tier_widget.font()
-            tier_font.setBold(str(tier_widget.text()) in tier_names)
+            tier_font.setBold(unicode(tier_widget.text()) in tier_names)
             tier_widget.setFont(tier_font)
 
     def optionsButtonClicked(self):
@@ -1263,7 +1263,7 @@ class CuPEDWizardCustomizeTier(CuPEDWizardCustomizeSelection):
         # Prompt the user to add or edit the display options for this tier.
         # (This takes care of adding and removing variables from the list of
         #  display variables and from the template transparently)
-        self.tier_display.customizeTierDisplay(str(tier_name), self.variable, \
+        self.tier_display.customizeTierDisplay(unicode(tier_name), self.variable, \
             self.variables, self.display_variables)
 
         # Update the formatting of items in the list.
@@ -1706,7 +1706,7 @@ class CuPEDWizardPreviewTemplate(QtGui.QWizardPage):
 
     def outputDirectoryEdited(self, text):
         if text and os.path.isdir(text):
-            self.template.output_directory = str(text)
+            self.template.output_directory = unicode(text)
         else:
             self.template.output_directory = None
 
@@ -1716,7 +1716,7 @@ class CuPEDWizardPreviewTemplate(QtGui.QWizardPage):
         # Find the name of the old directory, if one was given.
         old_directory = QtGui.QDesktopServices.storageLocation \
             (QtGui.QDesktopServices.DesktopLocation)
-        given_directory = str(self.ui.outputDirectoryLineEdit.text())
+        given_directory = QtCore.QString(self.ui.outputDirectoryLineEdit.text())
         if given_directory and os.path.isdir(given_directory):
             old_directory = given_directory
 
@@ -1730,7 +1730,7 @@ class CuPEDWizardPreviewTemplate(QtGui.QWizardPage):
         # and let Qt know that the completeness of this wizard page may
         # have changed.
         if dirname:
-            self.template.output_directory = str(dirname)
+            self.template.output_directory = unicode(dirname)
             self.ui.outputDirectoryLineEdit.setText(dirname)
             self.emit(QtCore.SIGNAL('completeChanged()'))
 
@@ -2088,7 +2088,7 @@ class CuPEDWizardFinishedTemplate(QtGui.QWizardPage):
 
         # Save the template as XML under the given file name.
         try:
-            output_file = open(str(qfname), 'w')
+            output_file = open(unicode(qfname), 'w')
             output_file.write(self.template.__xml__())
             output_file.close()
         except Exception, reason:
@@ -2103,7 +2103,7 @@ class CuPEDWizardFinishedTemplate(QtGui.QWizardPage):
 
         # Add the newly-saved template to the list of known templates, if it's
         # not already in the list.
-        fname = str(qfname)
+        fname = unicode(qfname)
         templates = self.config.get('general', 'templates')
         if templates:
             templates = eval(templates)
