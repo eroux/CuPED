@@ -41,7 +41,7 @@ class ffmpegAVTools(avtools.AVTools):
                  '-qdiff', '4'],
         'flv' : ['-vcodec', 'flv', '-qcomp', '0.6', '-qmax', '15', \
                  '-qdiff', '4', '-i_qfactor', '0.71', '-b_qfactor', '0.76', \
-                 '-b', '512k'],
+                 '-b:v', '512k'],
         'copy' : ['-vcodec', 'copy'],
         'none' : ['-vn']
     }
