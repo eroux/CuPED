@@ -49,4 +49,4 @@ Then run `./compile.sh` to compile the .ui files into python.
 
 ### Running ###
 
-Once installed, run `./src/cuped-cli` or `./src/cuped-qt`.
+Once installed, run `./cuped-cli` or `./cuped-qt`.
