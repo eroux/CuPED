@@ -30,7 +30,10 @@ that I don't use this software myself.
 
 ### Changelog ###
 
-First commit is the initial state of 0.3.15 version.
+ * accepting unicode file names and Tier IDs
+ * make code launchable without installation, removing installation scripts and binary files: only Linux and python-ready platforms supported
+ * first commit is the initial state of 0.3.15 version
+
 
 ### Installation ###
 
